@@ -30,8 +30,15 @@ class GeneralService {
     return this.model.findByIdAndUpdate(id, inData);
   }
 
-  listBy(conditions, pageNum, pageSize) {
-    return this.model.find(conditions)
+  async listBy(filter, pageNum, pageSize, isTotal) {
+    let total = isTotal ? await this.model.find(filter.conditions).count() : undefined;
+    let data;
+    if (pageSize === -1) {
+      data = await this.model.find(filter.conditions).select(filter.projections).sort({ createAt: -1 })
+    } else {
+      data = await this.model.find(filter.conditions).select(filter.projections).sort({ createAt: -1 }).skip((pageNum - 1) * pageSize).limit(pageSize)
+    }
+    return { total, data };
   }
 
   showBy(conditions) {
