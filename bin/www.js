@@ -2,7 +2,7 @@
 
 const http = require('http');
 const app = require('../app');
-const logger = require('../util/logger')
+const logger = require('../helper/logger')
 
 const { connectDB } = require('../dao/db/conn');
 

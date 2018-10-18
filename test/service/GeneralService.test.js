@@ -1,7 +1,7 @@
 const { assert, expect } = require('chai');
 const should = require('chai').should();
 const { connectDB, disconnnectDB } = require('../../dao/db/conn')
-const logger = require('../../util/logger')
+const logger = require('../../helper/logger')
 const GeneralService = require('../../service/GeneralService')
 
 describe('GeneralService', async function () {

@@ -4,7 +4,7 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 const util = require('util')
 
-const logger = require('./util/logger');
+const logger = require('./helper/logger');
 const apiRouter = require('./router/apiRouter');
 
 const jwt = require('jsonwebtoken');

@@ -1,9 +1,9 @@
 const util = require('util');
 const _ = require('lodash')
-const logger = require('../util/logger')
-const GeneralService = require('../service/GeneralService')
+const logger = require('../../helper/logger')
+const GeneralService = require('../../service/GeneralService')
 
-class GeneralApi {
+class GeneralController {
 
   static async list(req, res, next) {
     let modelName = req.params.modelName;
@@ -171,6 +171,25 @@ class GeneralApi {
       next(error);
     }
   }
+
+  static async updateBy(req, res, next) {
+    let modelName = req.params.modelName;
+    let updateObject = req.body;
+
+    try {
+      var generalService = new GeneralService(modelName);
+    } catch (err) {
+      res.status(400);
+      res.json({ type: false, message: 'Invalid Model Name' })
+      return;
+    }
+    try {
+      let data = await generalService.updateBy(updateObject);
+      res.json({ type: true, data: data })
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
-module.exports = GeneralApi;
+module.exports = GeneralController;
